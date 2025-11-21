@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  ...existing code...
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Simple Calculator</title>
+  <link rel="stylesheet" href="calcu.css">
+</head>
+<body>
+  <div class="calculator" role="application" aria-label="Simple calculator">
+    <input type="text" id="display" disabled aria-label="Calculator display">
+    <div class="buttons" role="group" aria-label="Calculator buttons">
+      <button onclick="clearDisplay()" aria-label="clear">C</button>
+      <button onclick="appendValue('/')" aria-label="divide">/</button>
+      <button onclick="appendValue('*')" aria-label="multiply">*</button>
+      <button onclick="deleteLast()" aria-label="backspace">⌫</button>
+
+      <button onclick="appendValue('7')">7</button>
+      <button onclick="appendValue('8')">8</button>
+      <button onclick="appendValue('9')">9</button>
+      <button onclick="appendValue('-')">-</button>
+
+      <button onclick="appendValue('4')">4</button>
+      <button onclick="appendValue('5')">5</button>
+      <button onclick="appendValue('6')">6</button>
+      <button onclick="appendValue('+')">+</button>
+
+      <button onclick="appendValue('1')">1</button>
+      <button onclick="appendValue('2')">2</button>
+      <button onclick="appendValue('3')">3</button>
+      <button onclick="calculateResult()" class="eq" aria-label="equals">=</button>
+
+      <button onclick="appendValue('0')" class="zero">0</button>
+      <button onclick="appendValue('.')">.</button>
+    </div>
+  </div>
+
+  <script>
+    const display = document.getElementById("display");
+
+    function appendValue(value) {
+      display.value += value;
+    }
+
+    function clearDisplay() {
+      display.value = '';
+    }
+
+    function deleteLast() {
+      display.value = display.value.slice(0, -1);
+    }
+
+    function calculateResult() {
+      try {
+        // simple evaluation for demo; keep expressions simple (no user-provided code execution in production)
+        const safe = display.value.replace(/[^0-9+\-*/(). ]/g, '');
+        // evaluate using Function for slightly better control than eval
+        // still for local/demo use only
+        display.value = Function('"use strict"; return (' + safe + ')')();
+      } catch {
+        display.value = "Error";
+      }
+    }
+
+    // keyboard support
+    window.addEventListener('keydown', (e) => {
+      const key = e.key;
+      if ((/^[0-9+\-*/().]$/).test(key)) {
+        appendValue(key);
+      } else if (key === 'Enter' || key === '=') {
+        e.preventDefault();
+        calculateResult();
+      } else if (key === 'Backspace') {
+        deleteLast();
+      } else if (key.toLowerCase() === 'c') {
+        clearDisplay();
+      }
+    });
+  </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+  ...existing code...
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio - DANDU GROHIT VARMA</title>
+  <link rel="stylesheet" href="profile.css" />
+</head>
+<body>
+  ...existing code...
+
+  <!-- Services (replaced placeholder with detailed cards + images) -->
+  <section id="services" class="services reveal">
+    <h2 class="section-title">Services I Offer</h2>
+    <p class="section-sub">Practical, maintainable solutions — from simple websites to desktop apps and mentoring.</p>
+
+    <div class="services-grid">
+      <article class="service-card">
+        <img src="https://source.unsplash.com/800x600/?web,development" alt="Web development" loading="lazy">
+        <div class="service-body">
+          <h3>Web Development</h3>
+          <p>Responsive sites and small web apps using HTML, CSS, JavaScript. Focus on accessibility, performance and clean structure so projects scale well.</p>
+        </div>
+      </article>
+
+      <article class="service-card">
+        <img src="https://source.unsplash.com/800x600/?code,programming" alt="Back-end & Algorithms" loading="lazy">
+        <div class="service-body">
+          <h3>Java & C++ Projects</h3>
+          <p>Console and GUI applications, data-structures practice and algorithmic solutions. I write readable, testable code and document architecture decisions.</p>
+        </div>
+      </article>
+
+      <article class="service-card">
+        <img src="https://source.unsplash.com/800x600/?ui,design" alt="UI/UX design" loading="lazy">
+        <div class="service-body">
+          <h3>UI / UX & Prototyping</h3>
+          <p>Design-focused layouts and simple prototypes. I create clean interfaces and consider mobile-first responsiveness and usability patterns.</p>
+        </div>
+      </article>
+
+      <article class="service-card">
+        <img src="https://source.unsplash.com/800x600/?career,mentoring" alt="Career guidance" loading="lazy">
+        <div class="service-body">
+          <h3>Mentoring & Resume Help</h3>
+          <p>Guidance for students: resume review, interview prep, learning plans for web and programming fundamentals.</p>
+        </div>
+      </article>
+    </div>
+
+    <div class="services-cta">
+      <a href="#contact" class="btn">Request a Quote</a>
+      <a href="#" class="btn outline">See Portfolio</a>
+    </div>
+  </section>
+
+  ...existing code...
+</body>
+</html>
